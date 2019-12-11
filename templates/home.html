@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    body {
+      margin-top: 50px;
+      margin-bottom: 100px;
+      margin-right: 150px;
+      margin-left: 80px;
+    }
+
+  </style>
+</head>
+  <body>
+    <h2>Southern Sierra Wildflower Club (SSWC) Database</h2>
+    <h1></h1>
+
+    <h4>Please enter a flower (common name, genus, species) to add to database</h4>
+    <form action="/new/" methods= "GET", "POST">
+        <input type="text" name="comname">
+        <input type="text" name="genus">
+        <input type="text" name="species">
+        <button name="new" type="submit">Add</button>
+    </form>
+
+    <h1></h1>
+
+    <h4>Please enter a sighting (flower common name, person, location, sighted) to add to database</h4>
+    <form action="/newSighting/" methods="GET","POST">
+        <input type="text" name="name">
+        <input type="text" name="person">
+        <input type="text" name="location">
+        <input type="text" name="sighted">
+        <button name="newSighting" type="submit">Add</button>
+    </form>
+
+    <h1></h1>
+
+
+
+    <h1></h1>
+
+    <h1></h1>
+
+    <div class="tableWrapper">
+      <table class="table table-striped table-hover">
+        <tr>
+            <th>Common Name</th>
+            <th>Genus</th>
+            <th>Species</th>
+            <th></th>
+            <th><form action="/on_edit/" method="POST">
+                <input type="hidden" name="_method" value="Edit">
+                <input type="submit" value="Edit flower" class="btn pull-right">
+            </form></th>
+        </tr>
+        {% for row in flowers %}
+        <tr>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>
+                  <form action="{{url_for('getSightings', name=row.2)}}" method="POST">
+                      <input type="hidden" name="_method" value="View">
+                      <input type="submit" value="View Sightings" class="btn pull-right">
+                  </form>
+                </td>
+                <td>
+                  <form action="{{url_for('delete', comname=row.2)}}" method="POST">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="submit" value="Delete" class="btn btn-danger pull-right">
+                  </form>
+                </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </body>
+</html>

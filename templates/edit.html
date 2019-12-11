@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    body {
+      margin-top: 50px;
+      margin-bottom: 100px;
+      margin-right: 150px;
+      margin-left: 80px;
+    }
+  </style>
+
+</head>
+  <body>
+    <h2>Southern Sierra Wildflower Club (SSWC) Database</h2>
+    <h1></h1>
+
+    <h4>Please enter the new flower attributes (genus, species) to add to database</h4>
+    <h1></h1>
+    <form action="/edit/" methods="POST">
+        <h4>Flower (comname) you would like to edit:</h4>
+        <input type="text" name="comname">
+        <h4>Updated genus:</h4>
+        <input type="text" name="genus">
+        <h4>Updated species:</h4>
+        <input type="text" name="species">
+        <h1></h1>
+        <button name="edit" value="submit" type="submit">Finish editing</button>
+    </form>
+
+    <h1></h1>
+
+  </body>
+</html>

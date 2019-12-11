@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    body {
+      margin-top: 50px;
+      margin-bottom: 100px;
+      margin-right: 150px;
+      margin-left: 80px;
+    }
+  </style>
+</head>
+  <body>
+    <h2>Southern Sierra Wildflower Club (SSWC) Database</h2>
+    <h1></h1>
+
+    <form action="/">
+        <button name="home" type="submit">Return home</button>
+    </form>
+    <h1></h1>
+
+    <div class="tableWrapper">
+      <table class="table table-striped table-hover">
+        <tr>
+          <th>Name</th>
+          <th>Person</th>
+          <th>Location</th>
+          <th>Sighted</th>
+        </tr>
+        {% for row in sighting %}
+                <tr>
+                        <td>{{ row.0 }}</td>
+                        <td>{{ row.1 }}</td>
+                        <td>{{ row.2 }}</td>
+                        <td>{{ row.3 }}</td>
+                </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </body>
+</html>

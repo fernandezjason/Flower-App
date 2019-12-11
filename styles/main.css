@@ -1,0 +1,15 @@
+#searchBar {
+  margin: 15px 10px;
+}
+
+body {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+.tableWrapper {
+  max-height: 400px;
+  overflow: auto;
+}
