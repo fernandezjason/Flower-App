@@ -1,8 +1,9 @@
 Current status of Assignment 5:
-- All base functionality complete for 100% on assignment (except the sighting entries need to be ordered)
+- All base functionality complete for 100% on assignment
 
 Needs:
 - Error handling for user input (ie check if flower they want to edit is in DB)
+    - ie. check if date entered correctly
 - Any extra credit we want to do
 
 
