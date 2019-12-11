@@ -31,52 +31,37 @@ def getFlowers():
     return render_template('home.html', flowers=flowers)
     connection.close()
 
-### RETURN RECENT SIGHTINGS (all the commented out stuff is stuff I have tried--
-### still need to get the sightings in order)
+### RETURN RECENT SIGHTINGS
 @app.route("/sightings/<string:name>", methods=["GET", "POST"])
 def getSightings(name):
     connection = engine.connect()
-    #sighting = request.args.get('sighted')
-    #sightedStr = str(sighting)
-    #sighting = connection.execute("SELECT * FROM SIGHTINGS WHERE NAME = :NAME",{"NAME":sightedStr}).fetchall()
-    #sighting = connection.execute("ORDER BY sighted").fetchmany(size=10)
-    #sighting = connection.execute("SELECT * FROM SIGHTINGS WHERE NAME = :NAME",{"NAME":sightedStr}, "ORDER BY SIGHTED ASC").fetchmany(size=10)
-    sighting = connection.execute("SELECT * FROM SIGHTINGS WHERE NAME = :NAME",{"NAME":name}).fetchmany(10)
+    sighting = connection.execute("SELECT * FROM SIGHTINGS WHERE NAME = :NAME",{"NAME":name}).fetchall()
 
-    #myList = []
-    #myList = sighting
-    #listLen = len(sighting)
-    #print(myList)
-    #print(len(sighting))
-    #it = iter(myList)
-    #myDict = dict(zip(it,it))
+    myList = []
+    myList = sighting
 
-    #proxyLen = len(sighting)
-    #for row in range(proxyLen):
-    #for row in sighting:
-    #    myList=dict(row)
+    count = 0
+    newList = []
+    for row in sighting:
+        dateStr = myList[count][3]
+        date = dateStr.replace("-","")
+        intDate = int(date)
+        newList.append((myList[count][0], myList[count][1], myList[count][2], intDate))
+        count = count + 1
 
-    #for row in range(listLen):
-    #for row in range(listLen):
-    #    dateStr = myList[row][3]
-    #    date = dateStr.replace("-","")
-    #    intDate = int(date)
-        #myList.append(intDate)
-        #myList[row][3] = intDate
-        #engine.execute(myList.update().where(myList.c.sighted == sighted).values(dateStr=intDate))
-    #    myList[row] = intDate
-        #engine.execute(mytable.update().values(dateStr=intDate))
+    sortedList = sorted(newList, reverse = True, key=lambda x: int(x[3]))[:10]
 
-    #myList.sort(reverse = True)
-    #myList.sorted(key=lambda x: int(x[3]))
-    #myList.sorted(L, key=itemgetter(2))
-    #for x in myList:
-    #    print(x[3])
-    #sorted(myList, key=myList.get, reverse=True)
-    #sorted(myList.iteritems(), key=itemgetter(3), reverse=True)
-    #print(myList)
+    listCnt = 0
+    finalList = []
+    for row in sortedList:
+        dateNum = sortedList[listCnt][3]
+        date = str(dateNum)
+        dateStr = '-'.join(date[i:i+2] for i in range(0, len(date), 2))
+        finalStr = dateStr.replace('-', '', 1)
+        finalList.append((sortedList[listCnt][0], sortedList[listCnt][1], sortedList[listCnt][2], finalStr))
+        listCnt = listCnt + 1
 
-    return render_template('sightings.html', sighting=sighting)
+    return render_template('sightings.html', sighting=finalList)
     connection.close()
 
 
